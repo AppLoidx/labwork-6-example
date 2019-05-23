@@ -20,21 +20,21 @@ import java.util.Scanner;
  * @author Arthur Kupriyanov
  */
 public class PersonReader {
-    public List<Person> readPersons(File file) throws FileNotFoundException {
+    public static List<Person> readPersons(File file) throws Exception {
         ArrayList<Person> persons = new ArrayList<>();
         Scanner sc = new Scanner(new FileInputStream(file));
         while (sc.hasNext()){
             try {
                 persons.add(parsePerson(sc.nextLine()));
-            } catch (Exception e) {
-                System.err.println("Не удалось спарсить персонажа : " + e.getMessage());
+            } catch (ParseException e){
+                System.err.println("Ошибка при чтении персонажа " + e.getMessage());
             }
         }
 
         return persons;
     }
 
-    public Person parsePerson(String line) throws PropertyNotFoundException, ParseException {
+    public static Person parsePerson(String line) throws PropertyNotFoundException, ParseException {
         String classOf = CSVReader.readString("classOf", line);
         int height = Integer.parseInt(CSVReader.readString("height", line).trim());
         String name = CSVReader.readString("name", line).trim();

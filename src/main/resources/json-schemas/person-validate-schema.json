@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "name":{
+      "type": "string",
+      "description": "name of person"
+    },
+    "class": {
+      "type": "string",
+      "description": "class of person"
+    },
+    "height": {
+      "type" : "integer",
+      "description" : "person width"
+    },
+    "birth_date": {
+      "type" : "string",
+      "description" : "persons birth date"
+    },
+    "helloMessage": {
+      "type" : "string",
+      "description" : "person's welcome message"
+    },
+    "gender" : {
+      "type" : "string",
+      "description" : ""
+    }
+  },
+  "required": ["name", "class", "height", "birth_date", "gender"],
+  "additionalProperties": false
+}

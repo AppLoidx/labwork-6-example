@@ -51,6 +51,31 @@ public class Person implements Comparable<Person>{
     public String getSimpleBirthDate(){
         return new SimpleDateFormat("dd.MM.yyyy").format(birthDate);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Dimension getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
     /**
      * Сравнение по имени и дате рождения
      */

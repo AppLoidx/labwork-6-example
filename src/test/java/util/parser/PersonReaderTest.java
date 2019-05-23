@@ -15,10 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class PersonReaderTest {
 
     @Test
-    void readPersons() throws FileNotFoundException {
-        PersonReader pr = new PersonReader();
-        List<Person> list1 = pr.readPersons(new File("src/test/java/util/parser/test.csv"));
-        List<Person> list2 = pr.readPersons(new File("src/test/java/util/parser/testWithWrong.csv"));
+    void readPersons() throws Exception {
+        List<Person> list1 = PersonReader.readPersons(new File("src/test/java/util/parser/test.csv"));
+        List<Person> list2 = PersonReader.readPersons(new File("src/test/java/util/parser/testWithWrong.csv"));
 
         assertNotNull(list1);
         for (Person p : list1){
