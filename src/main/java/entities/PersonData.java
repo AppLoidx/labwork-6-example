@@ -3,6 +3,9 @@ package entities;
 import com.google.gson.annotations.SerializedName;
 
 /**
+ *
+ * POM object for deserialize entity from JSON-formatted input
+ *
  * @author Arthur Kupriyanov
  */
 public class PersonData {
@@ -23,48 +26,20 @@ public class PersonData {
     public String getGender() {
         return gender;
     }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getHeight() {
         return height;
     }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
     public String getClassOf() {
         return classOf;
     }
-
-    public void setClassOf(String classOf) {
-        this.classOf = classOf;
-    }
-
     public String getHelloMessage() {
         return helloMessage;
     }
-
-    public void setHelloMessage(String helloMessage) {
-        this.helloMessage = helloMessage;
-    }
-
     public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
 }

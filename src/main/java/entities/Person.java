@@ -15,7 +15,7 @@ public class Person implements Comparable<Person>{
     private final Gender gender;
 
     /** Расположение в пространстве*/
-    private Dimension dimension = new Dimension(0 , 0);
+    private Point point = new Point(0 , 0);
 
     /** Дата рождения
      *
@@ -46,7 +46,7 @@ public class Person implements Comparable<Person>{
         this.helloMessage = helloMessage;
     }
     public String getSimpleDimension(){
-        return String.format("[x = %d ; y = %d]", dimension.width, dimension.height);
+        return String.format("[x = %d ; y = %d]", point.x, point.y);
     }
     public String getSimpleBirthDate(){
         return new SimpleDateFormat("dd.MM.yyyy").format(birthDate);
@@ -64,12 +64,12 @@ public class Person implements Comparable<Person>{
         return gender;
     }
 
-    public Dimension getDimension() {
-        return dimension;
+    public Point getPoint() {
+        return point;
     }
 
-    public void setDimension(Dimension dimension) {
-        this.dimension = dimension;
+    public void setPoint(Point point) {
+        this.point = point;
     }
 
     public Date getBirthDate() {
@@ -100,7 +100,7 @@ public class Person implements Comparable<Person>{
                 "height\t\t: '" + height + "\'\n" +
                 "helloMessage: '" + getHelloMessage() + '\'' + "\n" +
                 "gender\t\t: '" + gender + "\n" +
-                "dimension\t: '" + getSimpleDimension() + "\'\n" +
+                "point\t\t: '" + getSimpleDimension() + "\'\n" +
                 "birth date\t: '" + getSimpleBirthDate() + '\'';
     }
 

@@ -25,11 +25,11 @@ public class Add extends Command {
 
     @Override
     public CollectionAction getAction(String context) {
-        String json = JSONContextReader.readJSONContext(context);
 
+        System.out.println(context);
         try {
-            JSONPersonParser.validate(new JSONObject(json));
-            Person person = JSONPersonParser.getPerson(json);
+            JSONPersonParser.validate(new JSONObject(context));
+            Person person = JSONPersonParser.getPerson(context);
 
             return col -> {
                 if (person == null) {
@@ -38,7 +38,7 @@ public class Add extends Command {
                     return CollectionEditor.addPerson(col, person);
                 }
             };
-        }catch (JSONException e){
+        } catch (JSONException e){
             return JSONContextReader.jsonException(e);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

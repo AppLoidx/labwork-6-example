@@ -2,15 +2,13 @@ package main;
 
 import commands.Commander;
 import controls.CollectionEditor;
+import entities.CSVWriteable;
 import entities.PersonHashSet;
 import network.ServerLauncher;
 import network.handlers.RequestHandler;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @author Arthur Kupriyanov
@@ -20,9 +18,8 @@ public class Application {
     private  final String path2CSV ;
     {
         String path = System.getenv("LAB_INPUT_PATH");
-        if (path == null)
-        path2CSV = "src\\main\\resources\\data.csv";
-        else path2CSV = path;
+        if (path == null) path2CSV = "src\\main\\resources\\data.csv";  // default value
+        else path2CSV = path;   // value from environment
     }
 
     public static void main(String[] args) {
@@ -31,38 +28,33 @@ public class Application {
     }
 
     public void launch() {
+        // initializing empty collection
         PersonHashSet col = new PersonHashSet();
 
+        // import data from files if path exist
         if (path2CSV!=null)
-        CollectionEditor.addPersonsFromCSV(col, new File(path2CSV));    // data from file
+        CollectionEditor.addPersonsFromCSV(col, new File(path2CSV));
 
+
+        // adding web hook for emergency save collection
+        setWebhookForSaveCollection(col, "data/saved-data.csv");
+
+        // initializing commands
+        Commander commander = new Commander(col);
+
+        // launching server
+        ServerLauncher.launch(8888, new RequestHandler(col ,commander));
+
+    }
+
+    private void setWebhookForSaveCollection(CSVWriteable obj, String pathToSave){
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
-                col.saveTo(new File("data/saved-data.csv"));
+                obj.saveTo(new File(pathToSave));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }));
-
-        Commander commander = new Commander(col);
-//        ExecutorService executorService = Executors.newCachedThreadPool();
-//        Runnable runnable = () -> ServerLauncher.launch(8888, new RequestHandler(col, commander));
-//        executorService.execute(runnable);
-
-        String line;
-        Scanner sc = new Scanner(System.in);
-        int lastHashcode = col.hashCode();
-        while(!(line=sc.nextLine()).equals("exit")){
-            if (line.trim().equals("help")){
-                System.out.println("help");
-                continue;
-            }
-            String resp = commander.execute(line);
-            if (col.hashCode() != lastHashcode){
-                col.setChangedDate();
-            }
-            System.out.println(resp);
-        }
     }
 
 }

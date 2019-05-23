@@ -27,11 +27,10 @@ public class AddIfMax extends Command {
 
     @Override
     public CollectionAction getAction(String context) {
-        String json = JSONContextReader.readJSONContext(context);
 
         try {
-            JSONPersonParser.validate(new JSONObject(json));
-            Person person = JSONPersonParser.getPerson(json);
+            JSONPersonParser.validate(new JSONObject(context));
+            Person person = JSONPersonParser.getPerson(context);
 
             return col -> {
                 if (person == null) {

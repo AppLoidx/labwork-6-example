@@ -1,5 +1,7 @@
 package network.client;
 
+import network.URLCode;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -21,8 +23,8 @@ public class Client {
              BufferedWriter socketWriter = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
              BufferedReader socketReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
 
-            writeData(data, socketWriter);
-            return socketReader.readLine();
+            writeData(URLCode.encode(data), socketWriter);
+            return URLCode.decode(socketReader.readLine());
 
         }
     }

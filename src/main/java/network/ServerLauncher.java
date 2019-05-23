@@ -11,6 +11,7 @@ import java.net.ServerSocket;
  */
 public class ServerLauncher {
     public static void launch( int port, Handler handler){
+        System.out.println("Starting server ...");
         try {
             new Thread(new Server(new ServerSocket(port)).setHandler(handler)).start();
         } catch (IOException e) {

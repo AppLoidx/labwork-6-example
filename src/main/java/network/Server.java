@@ -31,7 +31,7 @@ public class Server implements Runnable{
             BufferedReader br = new BufferedReader(new InputStreamReader(ioSocket.getInputStream()));
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ioSocket.getOutputStream()))){
 
-            String request = br.readLine();
+            String request = URLCode.decode(br.readLine());
             String response = handler.getResponse(request);
             writeData(bw, response==null?"500":response);
         }
@@ -39,7 +39,8 @@ public class Server implements Runnable{
 
 
     private void writeData(BufferedWriter bw, String data) throws IOException {
-            bw.write(data.toCharArray());
+
+            bw.write(URLCode.encode(data));
             bw.flush();
     }
 

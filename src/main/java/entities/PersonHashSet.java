@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * @author Arthur Kupriyanov
  */
-public class PersonHashSet extends HashSet<Person> {
+public class PersonHashSet extends HashSet<Person> implements CSVWriteable{
 
     private Date changedDate = new Date();
 

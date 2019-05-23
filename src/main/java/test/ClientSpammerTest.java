@@ -20,6 +20,9 @@ class ClientSpammerTest {
     private static String[] commands =
             new String[]{"add", "add-if-min", "add-if-max", "remove 140", "remove where name=natasha"};
 
+
+
+
     public static void main(String ... args) {
             Application app = new Application();
             app.launch();
@@ -29,8 +32,6 @@ class ClientSpammerTest {
             Runnable r = () -> new ArrayList<>(clients).forEach(client -> {
                 try {
                     System.out.println(client.sendData("info"));
-//                    System.out.println(client.sendData(commands[4]));
-//                    System.out.println(client.sendData(commands[0]));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -41,13 +42,5 @@ class ClientSpammerTest {
                 new Thread(r).start();
             }
 
-
-//        for (Client c : clients){
-//            try {
-//                System.out.println(c.sendData("info"));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 }
