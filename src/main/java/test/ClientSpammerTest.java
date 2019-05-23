@@ -6,6 +6,7 @@ import network.client.highload.ClientFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,13 +33,14 @@ class ClientSpammerTest {
             Runnable r = () -> new ArrayList<>(clients).forEach(client -> {
                 try {
                     System.out.println(client.sendData("info"));
+                    System.out.println(client.sendData("info"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
             });
-
-            for (int i = 0; i < 100; i++) {
+        Date startTime = new Date();
+            for (int i = 0; i < 25; i++) {
                 new Thread(r).start();
             }
 

@@ -11,7 +11,7 @@ public class URLCode {
     public static String decode(String text){
         try {
             return URLDecoder.decode(text, "utf-8");
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
             return text;
         }

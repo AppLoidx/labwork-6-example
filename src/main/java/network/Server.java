@@ -14,6 +14,7 @@ public class Server implements Runnable{
     private Handler handler;
     private boolean isEnabled = false;
 
+
     public Server(final ServerSocket sc){
         socket = sc;
     }
@@ -27,15 +28,29 @@ public class Server implements Runnable{
     }
 
     private synchronized void listen(final Handler handler) throws IOException {
-        try(Socket ioSocket = socket.accept();
-            BufferedReader br = new BufferedReader(new InputStreamReader(ioSocket.getInputStream()));
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ioSocket.getOutputStream()))){
+            Socket ioSocket = socket.accept();
 
-            String request = URLCode.decode(br.readLine());
-            String response = handler.getResponse(request);
-            writeData(bw, response==null?"500":response);
+            new Thread(() -> {
+                try(BufferedReader br = new BufferedReader(new InputStreamReader(ioSocket.getInputStream()));
+                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ioSocket.getOutputStream()))){
+                String request = URLCode.decode(br.readLine());
+                String response = handler.getResponse(request);
+                    writeData(bw, response == null ? "NULL" : response);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        ioSocket.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+//            String request = URLCode.decode(br.readLine());
+//            String response = handler.getResponse(request);
+//            writeData(bw, response == null ? "NULL" : response);
         }
-    }
+
 
 
     private void writeData(BufferedWriter bw, String data) throws IOException {

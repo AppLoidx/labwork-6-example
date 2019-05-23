@@ -3,6 +3,7 @@ package network.client;
 import network.URLCode;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
 
 /**
@@ -25,7 +26,14 @@ public class Client {
 
             writeData(URLCode.encode(data), socketWriter);
             return URLCode.decode(socketReader.readLine());
-
+        } catch (ConnectException e){
+            System.err.println(e.getMessage());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            return sendData(data);
         }
     }
 
