@@ -5,6 +5,9 @@ import network.handlers.Handler;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author Arthur Kupriyanov
@@ -14,7 +17,8 @@ public class Server implements Runnable{
     private Handler handler;
     private boolean isEnabled = false;
 
-
+    private volatile Date startTime;
+    private final ExecutorService executorService = Executors.newCachedThreadPool();
     public Server(final ServerSocket sc){
         socket = sc;
     }
@@ -29,43 +33,84 @@ public class Server implements Runnable{
 
     private synchronized void listen(final Handler handler) throws IOException {
             Socket ioSocket = socket.accept();
-
-            new Thread(() -> {
-                try(BufferedReader br = new BufferedReader(new InputStreamReader(ioSocket.getInputStream()));
-                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ioSocket.getOutputStream()))){
-                String request = URLCode.decode(br.readLine());
-                String response = handler.getResponse(request);
-                    writeData(bw, response == null ? "NULL" : response);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        ioSocket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-//            String request = URLCode.decode(br.readLine());
-//            String response = handler.getResponse(request);
-//            writeData(bw, response == null ? "NULL" : response);
+            executorService.execute(() -> handle(handler, ioSocket));
         }
+    /**
+     * Не многопоточная прослушка
+     */
+    private synchronized void notMultithreadedListen(final Handler handler) throws IOException {
+        Socket ioSocket = socket.accept();
+        handle(handler, ioSocket);
+    }
+
+    private void handle(Handler handler, Socket ioSocket) {
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(ioSocket.getInputStream()));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ioSocket.getOutputStream()))){
+        String request = URLCode.decode(br.readLine());
+        String response = handler.getResponse(request);
+
+            writeData(bw, response == null ? "NULL" : response);
+//            writeDataFromStdIO(ioSocket, response);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ioSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("------------------------------------------------");
+            System.out.println("Work time: " + (new Date().getTime() - startTime.getTime()));
+            System.out.println("------------------------------------------------");
+
+            /*
+            Расскомментировав строку ниже, можно увидеть, что сервер многопоточный.
+            Для этого достаточно запустить ClientSpammer и посмотреть 50 выводов
+            результата выполнения команд.
+             */
+
+            // Расскомментировать   ----------------------------
+//                    try {
+//                        Thread.sleep(100000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+            // -------------------------------------------------
+
+        }
+    }
+
+
 
 
 
     private void writeData(BufferedWriter bw, String data) throws IOException {
-
             bw.write(URLCode.encode(data));
             bw.flush();
+    }
+    private synchronized void writeDataFromStdIO(Socket ioSocket, String data) throws IOException {
+        System.out.println(data);
+        PrintStream oldOut = System.out;
+        PrintStream socketPS = new PrintStream(ioSocket.getOutputStream());
+        System.setOut(socketPS);
+        System.out.println(data);
+        socketPS.flush();
+        socketPS.close();
+        System.setOut(oldOut);
     }
 
     @Override
     public void run() {
+        startTime = new Date();
         isEnabled = true;
         while(isEnabled){
 
             try {
-                this.listen(handler);
+                 this.listen(handler);                   // многопоточная прослушка (543мс при 2 потоках)
+//                 this.notMultithreadedListen(handler);   // немногопоточная прослушка
             } catch (IOException e) {
                 e.printStackTrace();
             }

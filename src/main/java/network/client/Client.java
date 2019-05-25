@@ -29,7 +29,7 @@ public class Client {
         } catch (ConnectException e){
             System.err.println(e.getMessage());
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }
