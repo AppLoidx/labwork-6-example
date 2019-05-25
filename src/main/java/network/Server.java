@@ -61,11 +61,6 @@ public class Server implements Runnable{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            System.out.println("------------------------------------------------");
-            System.out.println("Work time: " + (new Date().getTime() - startTime.getTime()));
-            System.out.println("------------------------------------------------");
-
             /*
             Расскомментировав строку ниже, можно увидеть, что сервер многопоточный.
             Для этого достаточно запустить ClientSpammer и посмотреть 50 выводов

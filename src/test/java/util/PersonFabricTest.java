@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.text.ParseException;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Arthur Kupriyanov

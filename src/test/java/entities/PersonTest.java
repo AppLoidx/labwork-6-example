@@ -5,12 +5,11 @@ import org.junit.jupiter.api.Test;
 import util.parser.PersonReader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Arthur Kupriyanov

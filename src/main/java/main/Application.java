@@ -28,21 +28,27 @@ public class Application {
     }
 
     public void launch() {
+
         // initializing empty collection
+
         PersonHashSet col = new PersonHashSet();
 
         // import data from files if path exist
+
         if (path2CSV!=null)
         CollectionEditor.addPersonsFromCSV(col, new File(path2CSV));
 
 
         // adding web hook for emergency save collection
+
         setWebhookForSaveCollection(col, "data/saved-data.csv");
 
         // initializing commands
+
         Commander commander = new Commander(col);
 
         // launching server
+
         ServerLauncher.launch(8888, new RequestHandler(col ,commander));
 
     }

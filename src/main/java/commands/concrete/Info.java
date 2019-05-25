@@ -22,7 +22,7 @@ public class Info extends Command {
 
         return col -> {
             StringBuilder sb = new StringBuilder();
-            sb.append("Дата изменения: ").append(new SimpleDateFormat("dd.MM HH.mm").format(col.getChangedDate()));
+            sb.append("Дата изменения: ").append(new SimpleDateFormat("dd.MM HH:mm:ss").format(col.getChangedDate()));
             sb.append("\n");
             sb.append("Хэш код: ").append(col.hashCode());
             StringBuilder persons = new StringBuilder();

@@ -31,7 +31,7 @@ public class Client {
             writeData(URLCode.encode(data), socketWriter);
             return URLCode.decode(socketReader.readLine());
         } catch (ConnectException e){
-            System.err.println(e.getMessage());
+            System.err.println("Не удалось отправить запрос: " + e.getMessage());
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e1) {

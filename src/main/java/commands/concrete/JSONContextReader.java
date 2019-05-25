@@ -4,8 +4,6 @@ import commands.CollectionAction;
 import org.everit.json.schema.ValidationException;
 import org.json.JSONException;
 
-import java.util.Scanner;
-
 /**
  * @author Arthur Kupriyanov
  */

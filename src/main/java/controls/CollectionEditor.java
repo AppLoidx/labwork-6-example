@@ -12,8 +12,9 @@ import java.io.IOException;
  */
 public class CollectionEditor {
     public static String addPerson(PersonHashSet set, Person p){
-            set.add(p);
-            return "Добавлен новый персонаж!\n" + p.getName() + ": " + p.getHelloMessage();
+            boolean res = set.add(p);
+            if (res) return "Добавлен новый персонаж!\n" + p.getName() + ": " + p.getHelloMessage();
+            else return "Такой персонаж уже есть в коллекции";
     }
 
     public static String addPersonsFromCSV(PersonHashSet set, File file){

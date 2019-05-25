@@ -17,7 +17,7 @@ public class Commander {
      * @param command полный введенный текст команды
      */
     public String execute(String command){
-        if (command.isEmpty()) return "Список инициализированный команд пуст";
+        if (command.isEmpty()) return "Command is empty";
         String[] commandParts = command.split(" ", 2);
         final String COMMAND = commandParts[0];
         final String CONTEXT = commandParts.length > 1? commandParts[1]:"";
@@ -26,7 +26,12 @@ public class Commander {
         if (cmd == null) {
             return "Команда с именем " + COMMAND + " не найдена";
         } else {
-            return cmd.getAction(CONTEXT).action(col);
+            int oldHash = col.hashCode();
+            String response = cmd.getAction(CONTEXT).action(col);
+            if (oldHash != col.hashCode()){
+                col.setChangedDate();
+            }
+            return response;
         }
     }
 }

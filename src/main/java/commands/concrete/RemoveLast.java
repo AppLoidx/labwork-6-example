@@ -27,7 +27,9 @@ public class RemoveLast extends Command {
 
             Person p = list.get(list.size()  - 1);
             col.remove(p);
-            return "Removed person with name : " + p.getName();
+            return "Removed person:" +
+                    "\n\t\tName : " + p.getName() +
+                    "\n\t\tHeight : " + p.getHeight();
         };
     }
 

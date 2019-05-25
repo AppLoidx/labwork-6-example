@@ -1,7 +1,5 @@
 package entities;
 
-import entities.Person;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -32,15 +30,8 @@ public class PersonHashSet extends HashSet<Person> implements CSVWriteable{
     public void saveTo(File file) throws IOException {
         if (!file.exists()){
             if (!file.mkdirs()){
-                System.err.println("Укажите другой путь для сохранения файла, так как " +
-                        "заданный путь недопустим для сохранения файла или введите exit, чтобы выйти " +
-                        "без сохранения");
-                String line;
-                if ((line=new Scanner(System.in).nextLine()).equals("exit")){
-                    return;
-                } else {
-                    saveTo(new File(line));
-                }
+                throw new IOException("Укажите другой путь для сохранения файла, так как " +
+                        "заданный путь недопустим для сохранения файла");
             }
         }
         if (file.isDirectory()) {
@@ -52,30 +43,22 @@ public class PersonHashSet extends HashSet<Person> implements CSVWriteable{
     }
 
     private void writeToFile(File file) throws IOException {
-        System.out.println(file.getPath());
         if (file.exists()) {
             if (file.canWrite()) {
 
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+                    System.out.println("saving persons");
                     for (Person p : this) bw.write(p.CSVData() + "\n");
                 }
             } else {
-                System.err.println("Файл недопустим для записи. Измените права, либо выберите " +
+                throw new IOException("Файл недопустим для записи. Измените права, либо выберите " +
                         "другой путь для сохранения файла");
-                String line;
-                if (!(line = new Scanner(System.in).nextLine()).equals("exit")) {
-                    saveTo(new File(line));
-                }
             }
         } else {
             if (file.createNewFile()) {
                 saveTo(file);
             } else {
-                System.err.println("Не удалось создать новый файл. Используйте другую директорию");
-                String line;
-                if (!(line = new Scanner(System.in).nextLine()).equals("exit")) {
-                    saveTo(new File(line));
-                }
+                throw new IOException("Не удалось создать новый файл. Используйте другую директорию");
             }
         }
     }

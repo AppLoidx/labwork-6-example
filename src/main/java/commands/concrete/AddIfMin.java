@@ -7,7 +7,6 @@ import entities.Person;
 import org.everit.json.schema.ValidationException;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import util.JSONPersonParser;
 
 import java.io.FileNotFoundException;

@@ -17,7 +17,7 @@
       "type" : "string",
       "description" : "persons birth date"
     },
-    "helloMessage": {
+    "hello_message": {
       "type" : "string",
       "description" : "person's welcome message"
     },
