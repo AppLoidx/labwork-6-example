@@ -5,7 +5,7 @@ package commands;
  *
  * @author Arthur Kupriyanov
  */
-public abstract class Command {
+public class Command {
     private CollectionAction action;
     private String name;
     public Command(){}

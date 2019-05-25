@@ -15,8 +15,8 @@ import java.io.IOException;
  */
 public class Application {
 
-    private  final String path2CSV ;
-    {
+    private  final static String path2CSV ;
+    static {
         String path = System.getenv("LAB_INPUT_PATH");
         if (path == null) path2CSV = "src\\main\\resources\\data.csv";  // default value
         else path2CSV = path;   // value from environment
@@ -55,6 +55,10 @@ public class Application {
                 e.printStackTrace();
             }
         }));
+    }
+
+    public static String getPath2CSV(){
+        return path2CSV;
     }
 
 }

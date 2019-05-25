@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
  */
 public class CSVReader {
     static String readString(String field, String data) throws PropertyNotFoundException{
-
         // ленивый квантор .+?
         String regex = ",*?[ ]*" + field + "\\s*?=\\s*?.*?(,+|$)";
 

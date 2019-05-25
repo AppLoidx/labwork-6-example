@@ -24,8 +24,8 @@ class ClientSpammerTest {
 
             Runnable r = () -> new ArrayList<>(clients).forEach(client -> {
                 try {
-                    client.sendData("info");
-                    client.sendData("info");
+                    System.out.println(client.sendData("import"));
+                    // client.sendData("info");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -33,7 +33,7 @@ class ClientSpammerTest {
             });
 
             List<Thread> threads = new ArrayList<>();
-            for (int i = 0; i < 150; i++) {
+            for (int i = 0; i < 1; i++) {
                 threads.add(new Thread(r));
                 threads.get(i).start();
             }
