@@ -1,4 +1,6 @@
-package network.client;
+package main;
+
+import network.client.Client;
 
 import java.io.IOException;
 import java.util.Scanner;
