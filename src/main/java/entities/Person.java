@@ -104,6 +104,9 @@ public class Person implements Comparable<Person>{
                 "birth date\t: '" + getSimpleBirthDate() + '\'';
     }
 
+    /**
+     * Сериализованный вид объекта в виде строкового CSV
+     */
     public String CSVData(){
         return String.format("classOf=%s,height=%d,name=%s,helloMessage=%s,gender=%s,birthDate=%s",
                 getClass().getSimpleName(), height,name, helloMessage=getHelloMessage(),gender.name(), getSimpleBirthDate());

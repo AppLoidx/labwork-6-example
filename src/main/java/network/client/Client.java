@@ -7,6 +7,20 @@ import java.net.ConnectException;
 import java.net.Socket;
 
 /**
+ * Класс клиента.
+ *
+ * При отправке запросов:
+ * <ul>
+ *     <li>Класс создает сокет</li>
+ *     <li>Подключается через указанный порт и хост</li>
+ *     <li>Отправляет данные</li>
+ *     <li>Ожидает ответа</li>
+ *     <li>Закрывает сокет</li>
+ *     <li>Выводит ответ</li>
+ * </ul>
+ *
+ * Чтобы отправить данные (и получить их), необходимо использовать метод {@link #sendData(String)}
+ *
  * @author Arthur Kupriyanov
  */
 public class Client {
@@ -19,6 +33,15 @@ public class Client {
         PORT = port;
     }
 
+    /**
+     * Метод для отправки и получения данных от сервера
+     *
+     * Данные кодируется через {@link URLCode}
+     *
+     * @param data отправляемые данные в виде обычного {@link String}
+     * @return ответ сервера
+     * @throws IOException ошибка при работе с сокетами. Следует обработать и попробовать переподключиться
+     */
     public String sendData(String data) throws IOException {
         try (Socket clientSocket = new Socket(HOST, PORT);
              BufferedWriter socketWriter = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));

@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.*;
 
 /**
+ *
+ * Коллекция для работы с персонажами
+ *
  * @author Arthur Kupriyanov
  */
 public class PersonHashSet extends HashSet<Person> implements CSVWriteable{
@@ -29,6 +32,7 @@ public class PersonHashSet extends HashSet<Person> implements CSVWriteable{
         return changedDate;
     }
 
+    @Override
     public void saveTo(File file) throws IOException {
         if (!file.exists()){
             if (!file.mkdirs()){

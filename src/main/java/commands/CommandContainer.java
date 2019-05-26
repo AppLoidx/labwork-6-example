@@ -7,10 +7,14 @@ import main.Application;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
+ * Контейнер всех команд. Может быть расширен и меть функцию добавления команд в Runtime
+ *
  * @author Arthur Kupriyanov
  */
 public class CommandContainer {
@@ -51,8 +55,23 @@ public class CommandContainer {
 //        commands.add(command);
 //    }
 
+    /**
+     * Возвращает команду по идентификатору {@link Command#getName()}
+     * @param commandName идентификатор команды
+     * @return исполняемая команда
+     */
     static Command getCommand(String commandName){
         Optional<Command> cmd = commands.stream().filter(c -> c.getName().equals(commandName)).findFirst();
         return cmd.orElse(null);
+    }
+
+    /**
+     * Удаление команды
+     *
+     * @param commandName идентификатор команды {@link Command#getName()}
+     */
+    static void deleteCommand(String commandName){
+        List<Command> list = commands.stream().filter(cmd -> cmd.getName().equals(commandName)).collect(Collectors.toList());
+        list.forEach(c -> commands.remove(c));
     }
 }

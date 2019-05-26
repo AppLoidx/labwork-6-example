@@ -7,7 +7,10 @@ import entities.PersonClass;
 import java.text.ParseException;
 import java.util.Date;
 
+
 /**
+ * Паттерн абстрактная фабрика для класса {@link Person}
+ *
  * @author Arthur Kupriyanov
  */
 public class PersonFabric {

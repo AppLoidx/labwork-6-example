@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * Основное приложение сервера
+ *
  * @author Arthur Kupriyanov
  */
 public class Application {
@@ -27,6 +29,9 @@ public class Application {
         app.launch();
     }
 
+    /**
+     * Запуск сервера
+     */
     public void launch() {
 
         // initializing empty collection
@@ -35,7 +40,7 @@ public class Application {
         // import data from files if path exist
 
         if (path2CSV!=null)
-        CollectionEditor.addPersonsFromCSV(col, new File(path2CSV));
+            System.out.println(CollectionEditor.addPersonsFromCSV(col, new File(path2CSV)));
 
 
         // adding web hook for emergency save collection

@@ -17,10 +17,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
+ * Парсер персонажа из JSON-данных. Имеет валидацию
+ *
  * @author Arthur Kupriyanov
  */
 public class JSONPersonParser {
     public static final String schemaPath = "src\\main\\resources\\json-schemas\\person-validate-schema.json";
+
+    /**
+     * Валидация представленной JSON-schema. Для этого загружается {@link Schema} из файла
+     * @param json объект валидации
+     * @throws FileNotFoundException выбрасывается если не найдена {@link Schema} из файла
+     * @throws ValidationException если объект не прошел валидацию
+     */
     public static void validate(JSONObject json) throws FileNotFoundException, ValidationException {
 
         File file = new File(schemaPath);
@@ -31,6 +40,12 @@ public class JSONPersonParser {
         schema.validate(json);
     }
 
+    /**
+     * Сериализация персонажа из JSON с помощью {@link com.google.gson.Gson}
+     * @param json JSON-schema в виде обычного {@link String}
+     * @return десериализованный {@link Person}
+     * @throws ParseException ошибка при чтении персонажа. Следует обработать ошибку и сообщить пользователю
+     */
     public static Person getPerson(String json) throws ParseException {
         PersonData data = new GsonBuilder().create().fromJson(json, PersonData.class);
 

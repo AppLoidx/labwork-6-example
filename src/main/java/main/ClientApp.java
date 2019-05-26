@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
+ * Основное приложение клиента
+ *
  * @author Arthur Kupriyanov
  */
 public class ClientApp {
@@ -20,6 +22,13 @@ public class ClientApp {
         return isActive;
     }
 
+    /**
+     * Отправка и получение ответа от сервера
+     *
+     * Метод выполняется поверх метода {@link Client#sendData(String)}
+     * @param req отправляемый запрос
+     * @return ответ сервера
+     */
     public String getResponse(String req) {
         if (client == null) {
             return "Client not connected";

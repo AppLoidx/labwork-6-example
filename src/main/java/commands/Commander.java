@@ -27,7 +27,12 @@ public class Commander {
             return "Команда с именем " + COMMAND + " не найдена";
         } else {
             int oldHash = col.hashCode();
-            String response = cmd.getAction(CONTEXT).action(col);
+            CollectionAction operation = cmd.getAction(CONTEXT);
+            if (operation==null){
+                CommandContainer.deleteCommand(COMMAND);
+                return "Команда не правильно инициализирована и удалена!";
+            }
+            String response = operation.action(col);
             if (oldHash != col.hashCode()){
                 col.setChangedDate();
             }

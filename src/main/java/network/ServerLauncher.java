@@ -7,13 +7,17 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 /**
+ * Запускает сервер на указанном порту с помощью метода {@link #launch(int, Handler)}
+ *
  * @author Arthur Kupriyanov
  */
 public class ServerLauncher {
     public static void launch( int port, Handler handler){
         System.out.println("Starting server ...");
         try {
-            new Thread(new Server(new ServerSocket(port)).setHandler(handler)).start();
+            Thread serverThread = new Thread(new Server(new ServerSocket(port)).setHandler(handler));
+            serverThread.start();
+            System.out.println("Started server on port : " + port + "\nThread name : " + serverThread.getName());
         } catch (IOException e) {
             e.printStackTrace();
         }

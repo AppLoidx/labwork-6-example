@@ -23,6 +23,11 @@ public enum Gender {
         }
     };
 
+    /**
+     * Получает из строкого значения Enum
+     * @param gender строковая запись пола
+     * @return {@link Gender}
+     */
     public static Gender getGender(String gender){
         for (Gender g : Gender.values()){
             if (g.name().toLowerCase().equals(gender.trim().toLowerCase())){

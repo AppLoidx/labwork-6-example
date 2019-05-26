@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Фабрика клиентов для тестирования сервера на нагруженность
+ *
  * @author Arthur Kupriyanov
  */
 public class ClientFactory {
