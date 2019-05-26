@@ -6,7 +6,6 @@ import util.parser.PersonReader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
 
 /**
  * @author Arthur Kupriyanov
