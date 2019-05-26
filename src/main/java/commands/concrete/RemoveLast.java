@@ -3,6 +3,7 @@ package commands.concrete;
 
 import commands.CollectionAction;
 import commands.Command;
+import controls.CollectionEditor;
 import entities.Person;
 
 import java.util.List;
@@ -26,10 +27,10 @@ public class RemoveLast extends Command {
             List<Person> list = col.getSortedList();
 
             Person p = list.get(list.size()  - 1);
-            col.remove(p);
-            return "Removed person:" +
-                    "\n\t\tName : " + p.getName() +
-                    "\n\t\tHeight : " + p.getHeight();
+
+            //col.remove(p);
+
+            return CollectionEditor.removePerson(col, p);
         };
     }
 
