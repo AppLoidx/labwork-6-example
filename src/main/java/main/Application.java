@@ -4,6 +4,7 @@ import commands.Commander;
 import controls.CollectionEditor;
 import entities.CSVWriteable;
 import entities.PersonHashSet;
+import network.Server;
 import network.ServerLauncher;
 import network.handlers.RequestHandler;
 
@@ -54,6 +55,9 @@ public class Application {
         // launching server
 
         ServerLauncher.launch(8888, new RequestHandler(col ,commander));
+
+        // launching serializable server
+        ServerLauncher.launchSerialServer(666, new RequestHandler(col, commander));
 
     }
 

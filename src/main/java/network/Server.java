@@ -5,7 +5,6 @@ import network.handlers.Handler;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -13,15 +12,16 @@ import java.util.concurrent.Executors;
  * @author Arthur Kupriyanov
  */
 public class Server implements Runnable{
-    private final ServerSocket socket;
-    private Handler handler;
-    private boolean isEnabled = false;
+    final ServerSocket socket;
+    protected Handler handler;
+    protected boolean isEnabled = false;
 
-    private volatile Date startTime;
-    private final ExecutorService executorService = Executors.newCachedThreadPool();
+    final ExecutorService executorService = Executors.newCachedThreadPool();
+
     public Server(final ServerSocket sc){
         socket = sc;
     }
+
     Server setHandler(Handler handler){
         if (handler!=null) this.handler = handler;
 
@@ -82,7 +82,7 @@ public class Server implements Runnable{
 
 
 
-    private void writeData(BufferedWriter bw, String data) throws IOException {
+    void writeData(BufferedWriter bw, String data) throws IOException {
             bw.write(URLCode.encode(data));
             bw.flush();
     }
@@ -99,7 +99,6 @@ public class Server implements Runnable{
 
     @Override
     public void run() {
-        startTime = new Date();
         isEnabled = true;
         while(isEnabled){
 

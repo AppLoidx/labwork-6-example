@@ -1,6 +1,7 @@
 package entities;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -8,7 +9,7 @@ import java.util.Objects;
 /**
  * @author Arthur Kupriyanov
  */
-public class Person implements Comparable<Person>{
+public class Person implements Comparable<Person>, Serializable {
     private final String name;
     private final int height;
     private String helloMessage;

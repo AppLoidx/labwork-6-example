@@ -42,4 +42,12 @@ public class PersonData {
         return birthDate;
     }
 
+    public PersonData(Person p) {
+        this.name = p.getName();
+        this.height = p.getHeight();
+        this.classOf = p.getClass().getSimpleName();
+        this.helloMessage = p.getHelloMessage();
+        this.birthDate = p.getSimpleBirthDate();
+        this.gender = p.getGender().toString();
+    }
 }
