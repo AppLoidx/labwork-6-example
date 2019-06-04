@@ -2,7 +2,6 @@ package network.client;
 
 import entities.Person;
 import network.Message;
-import util.Serializator;
 
 import java.io.*;
 import java.net.ConnectException;

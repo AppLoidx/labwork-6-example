@@ -4,7 +4,6 @@ import commands.Commander;
 import controls.CollectionEditor;
 import entities.CSVWriteable;
 import entities.PersonHashSet;
-import network.Server;
 import network.ServerLauncher;
 import network.handlers.RequestHandler;
 

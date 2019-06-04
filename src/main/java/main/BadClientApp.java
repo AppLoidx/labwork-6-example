@@ -4,7 +4,6 @@ import entities.Gender;
 import entities.Human;
 import network.URLCode;
 import network.client.BadClient;
-import network.client.Client;
 
 import java.util.Scanner;
 
