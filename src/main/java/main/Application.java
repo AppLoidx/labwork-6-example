@@ -18,9 +18,9 @@ public class Application {
 
     private  final static String path2CSV ;
     static {
-        String path = System.getenv("LAB_INPUT_PATH");
-        if (path == null) path2CSV = "src\\main\\resources\\data.csv";  // default value
-        else path2CSV = path;   // value from environment
+        path2CSV = System.getProperty("dataPath", "src\\main\\resources\\data.csv" );
+//        if (path == null) path2CSV = "src\\main\\resources\\data.csv";  // default value
+//        else path2CSV = path;   // value from environment
     }
 
     public static void main(String[] args) {
@@ -51,11 +51,13 @@ public class Application {
         Commander commander = new Commander(col);
 
         // launching server
+        int port = getPortFromSysProperty("port", 8888);
+        int serialPort = getPortFromSysProperty("serialPort", 666);
 
-        ServerLauncher.launch(8888, new RequestHandler(col ,commander));
+        ServerLauncher.launch(port, new RequestHandler(col ,commander));
 
         // launching serializable server
-        ServerLauncher.launchSerialServer(666, new RequestHandler(col, commander));
+        ServerLauncher.launchSerialServer(serialPort, new RequestHandler(col, commander));
 
     }
 
@@ -71,6 +73,14 @@ public class Application {
 
     public static String getPath2CSV(){
         return path2CSV;
+    }
+
+    public static int getPortFromSysProperty(String key,int def){
+        try{
+            return Integer.parseInt(System.getProperty(key));
+        } catch (Exception e){
+            return def;
+        }
     }
 
 }

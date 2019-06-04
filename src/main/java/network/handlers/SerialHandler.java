@@ -19,16 +19,12 @@ public class SerialHandler {
 
     public String getResponse(ObjectInputStream is){
         try {
-            System.out.println("123123123123");
-            System.out.println(is);
+
             Object obj = is.readObject();
-            System.out.println(obj);
             if (!(obj instanceof Message)){
                 return "Attachment is not instance of Message. Please check your settings";
             }
             Message clientMessage = (Message)obj;
-
-            System.out.println(clientMessage.getMessage());
 
             if (clientMessage.getAttach()!=null){
                 return messageWithAttach(clientMessage.getMessage(), clientMessage.getAttach());
