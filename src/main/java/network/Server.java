@@ -8,9 +8,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class Server implements Runnable{
     final ServerSocket socket;
     protected Handler handler;

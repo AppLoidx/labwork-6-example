@@ -4,9 +4,7 @@ import commands.CollectionAction;
 import org.everit.json.schema.ValidationException;
 import org.json.JSONException;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 class JSONContextReader {
 
     static CollectionAction validationException(ValidationException e){

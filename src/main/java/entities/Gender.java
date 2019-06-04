@@ -1,8 +1,6 @@
 package entities;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public enum Gender {
     MALE{
         @Override

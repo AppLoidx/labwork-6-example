@@ -7,7 +7,6 @@ import entities.PersonHashSet;
  *
  * Фунциональный интерфейс отвечающий за работу с коллекцией
  *
- * @author Arthur Kupriyanov
  */
 @FunctionalInterface
 public interface CollectionAction {

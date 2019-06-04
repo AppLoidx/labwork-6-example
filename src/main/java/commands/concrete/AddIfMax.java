@@ -15,9 +15,7 @@ import java.text.ParseException;
 import java.util.Comparator;
 import java.util.Optional;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class AddIfMax extends Command {
 
     @Override

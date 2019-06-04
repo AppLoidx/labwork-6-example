@@ -12,9 +12,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 class PersonFabricTest {
 
     @Test

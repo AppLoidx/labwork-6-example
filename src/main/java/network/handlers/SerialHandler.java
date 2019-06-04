@@ -16,7 +16,6 @@ import java.io.ObjectInputStream;
  *
  * Паттерн делегирование
  *
- * @author Arthur Kupriyanov
  */
 public class SerialHandler {
     private final Handler handler;

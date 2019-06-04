@@ -14,9 +14,7 @@ import java.text.ParseException;
 import java.util.Comparator;
 import java.util.Optional;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class AddIfMin extends Command {
 
     @Override

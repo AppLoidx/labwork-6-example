@@ -19,7 +19,6 @@ import java.text.SimpleDateFormat;
 /**
  * Парсер персонажа из JSON-данных. Имеет валидацию
  *
- * @author Arthur Kupriyanov
  */
 public class JSONPersonParser {
     public static final String schemaPath = "src\\main\\resources\\json-schemas\\person-validate-schema.json";

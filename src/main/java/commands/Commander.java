@@ -3,9 +3,7 @@ package commands;
 
 import entities.PersonHashSet;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class Commander {
     private PersonHashSet col;
     public Commander(PersonHashSet col){

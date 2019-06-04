@@ -7,9 +7,7 @@ import entities.Person;
 
 import java.text.SimpleDateFormat;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class Info extends Command {
 
     @Override

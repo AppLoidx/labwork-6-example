@@ -1,8 +1,6 @@
 package util.parser;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class PersonPropertyNotFoundException extends RuntimeException {
     public PersonPropertyNotFoundException(String message) {
         super(message);

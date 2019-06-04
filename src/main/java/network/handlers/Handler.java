@@ -7,7 +7,6 @@ package network.handlers;
  * гибкость и адаптируемость. Экзмепляры этого класса, следует передавать при создании сервера
  * или менять в Runtime с помощью методов, например, <code>setHandler(Handler h)</code>
  *
- * @author Arthur Kupriyanov
  */
 @FunctionalInterface
 public interface Handler {

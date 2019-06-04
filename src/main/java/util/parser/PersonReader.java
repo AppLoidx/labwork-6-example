@@ -14,9 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class PersonReader {
     public static List<Person> readPersons(File file) throws Exception {
         ArrayList<Person> persons = new ArrayList<>();

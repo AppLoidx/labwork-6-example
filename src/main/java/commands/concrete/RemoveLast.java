@@ -8,9 +8,7 @@ import entities.Person;
 
 import java.util.List;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class RemoveLast extends Command {
 
     @Override

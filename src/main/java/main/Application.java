@@ -14,7 +14,6 @@ import java.io.IOException;
 /**
  * Основное приложение сервера
  *
- * @author Arthur Kupriyanov
  */
 public class Application {
 

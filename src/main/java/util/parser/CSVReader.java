@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
  *
  * Работает со строкой в формате CSV
  *
- * @author Arthur Kupriyanov
  */
 public class CSVReader {
     static String readString(String field, String data) throws PropertyNotFoundException{

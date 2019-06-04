@@ -4,9 +4,7 @@ import commands.CollectionAction;
 import commands.Command;
 
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class Show extends Command {
     private String decor = "--------------------\n";
     @Override

@@ -6,9 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class Person implements Comparable<Person>, Serializable {
     private final String name;
     private final int height;

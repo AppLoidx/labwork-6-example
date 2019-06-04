@@ -2,9 +2,7 @@ package util;
 
 import java.io.*;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class Serializator {
     public static byte[] serialize(Serializable obj) throws IOException {
         ByteArrayOutputStream ba = new ByteArrayOutputStream();

@@ -3,9 +3,7 @@ package network.handlers;
 import commands.Commander;
 import entities.PersonHashSet;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class RequestHandler implements Handler {
     private final PersonHashSet col;
     private final Commander commander;

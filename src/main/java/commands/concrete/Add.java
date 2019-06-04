@@ -13,9 +13,7 @@ import util.JSONPersonParser;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class Add extends Command {
 
     @Override

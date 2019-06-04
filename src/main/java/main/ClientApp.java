@@ -8,7 +8,6 @@ import java.util.Scanner;
 /**
  * Основное приложение клиента
  *
- * @author Arthur Kupriyanov
  */
 public class ClientApp {
     private Client client;

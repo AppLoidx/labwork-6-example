@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
  *
  * POM object for deserialize entity from JSON-formatted input
  *
- * @author Arthur Kupriyanov
  */
 public class PersonData {
     @SerializedName("name")

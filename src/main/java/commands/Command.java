@@ -3,7 +3,6 @@ package commands;
 /**
  * Superclass for all commands
  *
- * @author Arthur Kupriyanov
  */
 public class Command {
     private CollectionAction action;

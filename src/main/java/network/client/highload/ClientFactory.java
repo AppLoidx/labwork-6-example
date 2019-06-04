@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * Фабрика клиентов для тестирования сервера на нагруженность
  *
- * @author Arthur Kupriyanov
  */
 public class ClientFactory {
     public static List<Client> getClients(int count, String host, int port){

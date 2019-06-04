@@ -12,7 +12,6 @@ import java.util.*;
  *
  * Коллекция для работы с персонажами
  *
- * @author Arthur Kupriyanov
  */
 public class PersonHashSet extends HashSet<Person> implements CSVWriteable{
 

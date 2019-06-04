@@ -5,7 +5,6 @@ import java.util.Date;
 /**
  * Enum позволяющий создавать конкретные объекты. Используется в {@link util.PersonFabric}
  *
- * @author Arthur Kupriyanov
  */
 public enum PersonClass {
     LOLI{

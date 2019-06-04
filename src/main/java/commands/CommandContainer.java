@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 /**
  * Контейнер всех команд. Может быть расширен и меть функцию добавления команд в Runtime
  *
- * @author Arthur Kupriyanov
  */
 public class CommandContainer {
     private static Set<Command> commands = new HashSet<>();

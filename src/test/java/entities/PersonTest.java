@@ -11,9 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 class PersonTest {
 
     @Test

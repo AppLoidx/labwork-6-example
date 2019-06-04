@@ -9,7 +9,6 @@ import java.net.ServerSocket;
 /**
  * Запускает сервер на указанном порту с помощью метода {@link #launch(int, Handler)}
  *
- * @author Arthur Kupriyanov
  */
 public class ServerLauncher {
     public static void launch( int port, Handler handler){

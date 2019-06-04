@@ -21,7 +21,6 @@ import java.net.Socket;
  *
  * Чтобы отправить данные (и получить их), необходимо использовать метод {@link #sendData(String)}
  *
- * @author Arthur Kupriyanov
  */
 public class Client {
     private final String HOST;

@@ -6,9 +6,7 @@ import commands.Command;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class Save extends Command {
     private final String FILENAME = "saved-data.csv";
     @Override

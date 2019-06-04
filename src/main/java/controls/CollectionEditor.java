@@ -16,7 +16,6 @@ import java.io.IOException;
  *
  * Также все методы синхронизированы, что позволяет делать операции по работе с коллекциями атомарными
  *
- * @author Arthur Kupriyanov
  */
 public class CollectionEditor {
     /**

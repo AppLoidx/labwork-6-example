@@ -8,9 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 class PersonReaderTest {
 
     @Test

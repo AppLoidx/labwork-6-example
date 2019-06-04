@@ -8,9 +8,7 @@ import util.parser.PersonReader;
 
 import java.text.ParseException;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class Import extends Command {
     @Override
     public String getName() {

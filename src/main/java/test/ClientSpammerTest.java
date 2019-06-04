@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * @author Arthur Kupriyanov
- */
+
 class ClientSpammerTest {
 
     public static void main(String ... args) {

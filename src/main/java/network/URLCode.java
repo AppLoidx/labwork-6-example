@@ -9,7 +9,6 @@ import java.net.URLEncoder;
  *
  * Кодируется\Декодируется с помощью {@link URLEncoder}\{@link URLDecoder} из пакета {@link java.net}
  *
- * @author Arthur Kupriyanov
  */
 public class URLCode {
     /**

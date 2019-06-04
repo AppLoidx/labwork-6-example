@@ -11,7 +11,6 @@ import java.util.Date;
 /**
  * Паттерн абстрактная фабрика для класса {@link Person}
  *
- * @author Arthur Kupriyanov
  */
 public class PersonFabric {
 

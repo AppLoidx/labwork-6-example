@@ -8,9 +8,7 @@ import network.client.Client;
 
 import java.util.Scanner;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class BadClientApp {
     private BadClient client;
     private boolean isActive = true;

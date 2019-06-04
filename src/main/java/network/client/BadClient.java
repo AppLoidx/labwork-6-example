@@ -10,9 +10,7 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
-/**
- * @author Arthur Kupriyanov
- */
+
 public class BadClient {
     private final String HOST;
     private final int PORT;
