@@ -18,7 +18,17 @@ public class BadClientApp {
     public static void main(String[] args) {
         BadClientApp app = new BadClientApp();
         Scanner sc = new Scanner(System.in);
-        app.connect("localhost", 666);
+        String host;
+        int port;
+        try {
+            host = System.getProperty("host", "localhost");
+            port = Integer.parseInt(System.getProperty("port", "8888"));
+        } catch (Exception e){
+            System.err.println("Ошибка " + e.getMessage() + "\nБудут использованы параметры по умолчанию");
+            host = "localhost";
+            port = 8888;
+        }
+        app.connect(host, port);
         while (app.isActive()) {
             String req = sc.nextLine();
             if (req.equals("exit")) {
