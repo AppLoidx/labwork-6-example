@@ -101,8 +101,8 @@ public class Server implements Runnable{
         while(isEnabled){
 
             try {
-//                 this.listen(handler);                   // многопоточная прослушка (543мс при 2 потоках)
-                 this.notMultithreadedListen(handler);   // немногопоточная прослушка
+                 this.listen(handler);                   // многопоточная прослушка (543мс при 2 потоках)
+                 //this.notMultithreadedListen(handler);   // немногопоточная прослушка
             } catch (IOException e) {
                 e.printStackTrace();
             }

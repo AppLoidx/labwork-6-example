@@ -1,9 +1,10 @@
 package commands.concrete;
 
-import com.sun.javafx.fxml.PropertyNotFoundException;
+
 import commands.CollectionAction;
 import commands.Command;
 import entities.Person;
+import util.parser.PersonPropertyNotFoundException;
 import util.parser.PersonReader;
 
 import java.text.ParseException;
@@ -29,7 +30,7 @@ public class Import extends Command {
                         if (res) log.append("Person ").append(p.getName()).append(" added!\n");
                         else log.append("Person ").append(p.getName()).append(" not added because this person exist!\n");
                     }
-                } catch (ParseException | PropertyNotFoundException e) {
+                } catch (ParseException | PersonPropertyNotFoundException e) {
                     log.append(e.getMessage()).append("\n");
                 }
             }

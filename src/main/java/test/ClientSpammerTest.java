@@ -29,7 +29,7 @@ class ClientSpammerTest {
             int threadsCount;
 
             try {
-                port = Integer.parseInt(System.getProperty("port", "8888"));
+                port = Integer.parseInt(System.getProperty("port", "5123"));
 
                 clientsCount = Integer.parseInt(System.getProperty("clients", "25"));
                 threadsCount = Integer.parseInt(System.getProperty("threads", "7"));
