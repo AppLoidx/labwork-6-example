@@ -46,7 +46,7 @@ public class BadClient {
     }
 
     public String sendCommand(String command){
-        Message message = new Message(command);
+        Message message = new Message(dataPreHandle(command));
 //        try {
             return sendData(message);
 //        } catch (IOException e) {
@@ -74,6 +74,37 @@ public class BadClient {
         bf.put(baos.toByteArray());
         bf.flip();
         return bf;
+    }
+
+    private String dataPreHandle(String data){
+        if (data.equals("import")){
+            File file = new File(getDataFilePath());
+            if (file.exists() && file.canRead()){
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(file));
+                    String line;
+                    StringBuilder fileContext = new StringBuilder();
+                    while((line = br.readLine())!=null){
+                        fileContext.append(line).append("\n");
+                    }
+
+                    return "import " + fileContext.toString();
+                } catch (IOException e) {
+                    System.err.println("Can't load file to server : " + e.getMessage());
+                    return null;
+                }
+            } else {
+                System.err.println("File doesn't exist or permission denied!");
+                return null;
+            }
+        } else {
+            return data;
+        }
+    }
+
+    private String getDataFilePath(){
+        String path = System.getenv("LAB_DATA_FILE");
+        return path==null?"dataImport.csv": path;
     }
 
 }

@@ -39,7 +39,7 @@ public class BadServer extends Server {
 
     private synchronized void listen(SerialHandler sHandler) throws IOException {
         Socket ioSocket = socket.accept();
-        executorService.execute(() -> handle(sHandler, ioSocket));
+        new Thread(() -> handle(sHandler, ioSocket)).start();
     }
 
     @Override

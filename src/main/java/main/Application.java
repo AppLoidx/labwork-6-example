@@ -17,10 +17,10 @@ import java.io.IOException;
 public class Application {
 
     private  final static String path2CSV ;
+
     static {
-        path2CSV = System.getProperty("dataPath", "src\\main\\resources\\data.csv" );
-//        if (path == null) path2CSV = "src\\main\\resources\\data.csv";  // default value
-//        else path2CSV = path;   // value from environment
+        path2CSV = System.getProperty("dataPath", "dataServer.csv" );
+
     }
 
     public static void main(String[] args) {
@@ -51,13 +51,13 @@ public class Application {
         Commander commander = new Commander(col);
 
         // launching server
-        int port = getPortFromSysProperty("port", 8888);
+        int port = getPortFromSysProperty("port", 5123);
         int serialPort = getPortFromSysProperty("serialPort", 666);
 
-        ServerLauncher.launch(port, new RequestHandler(col ,commander));
+        // ServerLauncher.launch(port, new RequestHandler(col ,commander));
 
         // launching serializable server
-        ServerLauncher.launchSerialServer(serialPort, new RequestHandler(col, commander));
+        ServerLauncher.launchSerialServer(port, new RequestHandler(col, commander));
 
     }
 

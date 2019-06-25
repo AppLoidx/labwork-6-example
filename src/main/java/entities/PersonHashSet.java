@@ -52,7 +52,6 @@ public class PersonHashSet extends HashSet<Person> implements CSVWriteable{
             if (file.canWrite()) {
 
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-                    System.out.println("saving persons");
                     for (Person p : this) bw.write(p.CSVData() + "\n");
                 }
             } else {

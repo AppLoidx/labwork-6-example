@@ -1,7 +1,5 @@
 package util.parser;
 
-import com.sun.javafx.fxml.PropertyNotFoundException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,20 +15,20 @@ import java.util.regex.Pattern;
  *
  */
 public class CSVReader {
-    static String readString(String field, String data) throws PropertyNotFoundException{
+    static String readString(String field, String data) throws PersonPropertyNotFoundException{
         // ленивый квантор .+?
         String regex = ",*?[ ]*" + field + "\\s*?=\\s*?.*?(,+|$)";
 
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(data);
         if (m.find()) return m.group().split("=")[1].replace(",", "");
-        else throw new PropertyNotFoundException("Поле " + field + " не найдено!");
+        else throw new PersonPropertyNotFoundException("Поле " + field + " не найдено!");
     }
 
     static String readString(String field, String data, String defaultVal){
         try{
             return  readString(field, data);
-        } catch (PropertyNotFoundException e){
+        } catch (PersonPropertyNotFoundException e){
             return defaultVal;
         }
     }

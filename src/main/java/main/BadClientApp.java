@@ -22,11 +22,11 @@ public class BadClientApp {
         int port;
         try {
             host = System.getProperty("host", "localhost");
-            port = Integer.parseInt(System.getProperty("port", "8888"));
+            port = Integer.parseInt(System.getProperty("port", "5123"));
         } catch (Exception e){
             System.err.println("Ошибка " + e.getMessage() + "\nБудут использованы параметры по умолчанию");
             host = "localhost";
-            port = 8888;
+            port = 666;
         }
         app.connect(host, port);
         while (app.isActive()) {

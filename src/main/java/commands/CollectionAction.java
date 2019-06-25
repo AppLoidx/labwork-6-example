@@ -17,4 +17,5 @@ public interface CollectionAction {
      * @return результат операции в виде строки, которая поакзывается исполнителю
      */
     String action(PersonHashSet set);
+
 }

@@ -1,6 +1,5 @@
 package util.parser;
 
-import com.sun.javafx.fxml.PropertyNotFoundException;
 import entities.Gender;
 import entities.Person;
 import util.PersonFabric;
@@ -30,7 +29,7 @@ public class PersonReader {
         return persons;
     }
 
-    public static Person parsePerson(String line) throws PropertyNotFoundException, ParseException {
+    public static Person parsePerson(String line) throws PersonPropertyNotFoundException, ParseException {
         String classOf = CSVReader.readString("classOf", line);
         int height = Integer.parseInt(CSVReader.readString("height", line).trim());
         String name = CSVReader.readString("name", line).trim();

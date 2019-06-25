@@ -31,7 +31,7 @@ public class Server implements Runnable{
 
     private synchronized void listen(final Handler handler) throws IOException {
             Socket ioSocket = socket.accept();
-            executorService.execute(() -> handle(handler, ioSocket));
+            new Thread(() -> handle(handler, ioSocket)).start();
         }
     /**
      * Не многопоточная прослушка
@@ -66,11 +66,11 @@ public class Server implements Runnable{
              */
 
             // Расскомментировать   ----------------------------
-//                    try {
-//                        Thread.sleep(100000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             // -------------------------------------------------
 
         }
@@ -101,8 +101,8 @@ public class Server implements Runnable{
         while(isEnabled){
 
             try {
-                 this.listen(handler);                   // многопоточная прослушка (543мс при 2 потоках)
-//                 this.notMultithreadedListen(handler);   // немногопоточная прослушка
+//                 this.listen(handler);                   // многопоточная прослушка (543мс при 2 потоках)
+                 this.notMultithreadedListen(handler);   // немногопоточная прослушка
             } catch (IOException e) {
                 e.printStackTrace();
             }
