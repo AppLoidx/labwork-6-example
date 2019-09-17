@@ -3,10 +3,8 @@ package network;
 
 import network.handlers.SerialHandler;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -17,13 +15,12 @@ public class BadServer extends Server {
     }
 
     private void handle(SerialHandler handler, Socket ioSocket){
-        try(ObjectInputStream ioStream = new ObjectInputStream(ioSocket.getInputStream());
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ioSocket.getOutputStream()))){
+        try(ObjectInputStream ioStream = new ObjectInputStream(ioSocket.getInputStream())){
 
             String response = handler.getResponse(ioStream);
 
-            writeData(bw, response == null ? "NULL" : response);
-//            writeDataFromStdIO(ioSocket, response);
+            // TODO: запись в потоки ввода вывода
+            writeDataFromStdIO(ioSocket, response);
 
 
         } catch (IOException e) {
@@ -48,8 +45,8 @@ public class BadServer extends Server {
         while(isEnabled){
 
             try {
-                this.listen(new SerialHandler(handler));                   // многопоточная прослушка (543мс при 2 потоках)
-//                 this.notMultithreadedListen(handler);   // немногопоточная прослушка
+                this.listen(new SerialHandler(handler));                   // многопоточная прослушка
+//                 this.notMultithreadedListen(handler);                   // немногопоточная прослушка
             } catch (IOException e) {
                 e.printStackTrace();
             }

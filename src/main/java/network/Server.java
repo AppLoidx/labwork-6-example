@@ -66,11 +66,11 @@ public class Server implements Runnable{
              */
 
             // Расскомментировать   ----------------------------
-                    try {
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        Thread.sleep(50);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
             // -------------------------------------------------
 
         }
@@ -84,7 +84,8 @@ public class Server implements Runnable{
             bw.write(URLCode.encode(data));
             bw.flush();
     }
-    private synchronized void writeDataFromStdIO(Socket ioSocket, String data) throws IOException {
+
+    synchronized void writeDataFromStdIO(Socket ioSocket, String data) throws IOException {
         System.out.println(data);
         PrintStream oldOut = System.out;
         PrintStream socketPS = new PrintStream(ioSocket.getOutputStream());

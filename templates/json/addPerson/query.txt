@@ -1,2 +1,2 @@
 add { class : Human, name : Alice, helloMessage : Hey!, height : 168, gender : female}
-add { class : Human, name : Alice, helloMessage : Hey!, height : 168, gender : female, birth_date : 21.07.2018}
+add { class : Human, name : Alice, height : 168, gender : female, birth_date : 21.07.2018}

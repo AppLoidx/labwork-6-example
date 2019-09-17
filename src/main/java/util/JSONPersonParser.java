@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
  *
  */
 public class JSONPersonParser {
-    public static final String schemaPath = "src\\main\\resources\\json-schemas\\person-validate-schema.json";
+    public static final String schemaPath = "person-validate-schema.json";
 
     /**
      * Валидация представленной JSON-schema. Для этого загружается {@link Schema} из файла

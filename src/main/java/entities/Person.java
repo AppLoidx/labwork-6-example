@@ -33,7 +33,7 @@ public class Person implements Comparable<Person>, Serializable {
         this(name, height, gender, new Date());
     }
 
-
+    // TODO: сортированы по размеру
     public int compareTo(Person o) {
         return o.height - height;
     }

@@ -22,8 +22,10 @@ public class BadClient {
     private String sendData(Serializable obj){
         try(SocketChannel sChannel = SocketChannel.open()){
             try {
+                // TODO: через сетевой канал
                 sChannel.connect(new InetSocketAddress(HOST, PORT));
             } catch (ConnectException ce){
+                // TODO: Обработка временной недоступности
                 return "Can't connect to server. Caused by : " + ce.getMessage() + "\nPlease try again";
             }
 
@@ -47,23 +49,12 @@ public class BadClient {
 
     public String sendCommand(String command){
         Message message = new Message(dataPreHandle(command));
-//        try {
             return sendData(message);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return "Can't send command.\nException: " + e.getMessage() +
-//                    "Command: " + message.getMessage();
-//        }
+
     }
     public String sendCommand(String command, Person p){
         Message message = new Message(command , p);
-//        try {
             return sendData(message);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return "Can't send command.\nException: " + e.getMessage() +
-//                    "Command: " + message.getMessage();
-//        }
     }
 
     private ByteBuffer prepareBuffer(Object obj) throws IOException {

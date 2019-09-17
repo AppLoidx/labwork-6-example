@@ -5,7 +5,9 @@ import entities.Person;
 import java.io.Serializable;
 import java.util.Date;
 
-
+/**
+ * Сериализуемый класс, отправляемый клиенту
+ */
 public class Message implements Serializable {
     private final String msg;
     private Person attach;

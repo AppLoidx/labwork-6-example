@@ -28,8 +28,9 @@ public class Remove extends Command {
         try {
             int width = Integer.parseInt(context);
             return col -> {
-//                col.removeIf(person -> person.getHeight() == width);
                 StringBuilder log = new StringBuilder();
+
+                // TODO: Stream usage
                 Set<Person> set = col.stream().filter(person -> person.getHeight() == width).collect(Collectors.toSet());
                 set.forEach(p -> log.append(CollectionEditor.removePerson(col, p)).append("\n"));
                 return "Deleting by width : " + width + "\nLogs:\n" + log.toString();
@@ -43,15 +44,12 @@ public class Remove extends Command {
 
     private CollectionAction deleteByName(String name){
         return col -> {
-//            col.removeIf(person -> person.getName().equals(name));
             StringBuilder log = new StringBuilder();
             Set<Person> set = col.stream().filter(p -> p.getName().equals(name)).collect(Collectors.toSet());
             set.forEach(p->log.append(CollectionEditor.removePerson(col, p)).append("\n"));
             if (log.toString().isEmpty()){
                 return "Персонаж с именем " + name + " не найден";
             }
-
-            System.out.println(log);
             return log.toString();
         };
     }

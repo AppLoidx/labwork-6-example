@@ -11,4 +11,8 @@ public class Loli extends Person{
     public Loli(String name, int height, Gender gender) {
         super(name, height, gender);
     }
+
+    public void loliSpecialAttack(){
+        System.out.println("This attack can do only lolies!");
+    }
 }

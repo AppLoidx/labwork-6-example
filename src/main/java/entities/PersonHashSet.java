@@ -7,18 +7,21 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  *
  * Коллекция для работы с персонажами
  *
  */
-public class PersonHashSet extends HashSet<Person> implements CSVWriteable{
+//TODO : Замена на потокобезопасную
+public class PersonHashSet extends CopyOnWriteArraySet<Person> implements CSVWriteable{
 
     private Date changedDate = new Date();
 
     public List<Person> getSortedList(){
         List<Person> persons = new ArrayList<>(this);
+        // TODO: сортированы по размеру
         Collections.sort(persons);
         return persons;
     }
