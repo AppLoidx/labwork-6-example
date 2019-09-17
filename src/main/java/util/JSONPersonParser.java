@@ -10,9 +10,8 @@ import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -29,9 +28,9 @@ public class JSONPersonParser {
      * @throws FileNotFoundException выбрасывается если не найдена {@link Schema} из файла
      * @throws ValidationException если объект не прошел валидацию
      */
-    public static void validate(JSONObject json) throws FileNotFoundException, ValidationException {
+    public static void validate(JSONObject json) throws FileNotFoundException, ValidationException, URISyntaxException {
 
-        File file = new File(schemaPath);
+        File file = new File(JSONPersonParser.class.getClassLoader().getResource("json-schemas/person-validate-schema.json").getPath());
         if (!file.exists()){
             throw new FileNotFoundException("Файл " + file.getPath() + " не найден!");
         }

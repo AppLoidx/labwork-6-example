@@ -26,7 +26,7 @@ public class ClientApp {
         } catch (Exception e){
             System.err.println("Ошибка " + e.getMessage() + "\nБудут использованы параметры по умолчанию");
             host = "localhost";
-            port = 666;
+            port = 5123;
         }
         app.connect(host, port);
         while (app.isActive()) {

@@ -5,6 +5,7 @@ import network.handlers.SerialHandler;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -22,7 +23,6 @@ public class BadServer extends Server {
             // TODO: запись в потоки ввода вывода
             writeDataFromStdIO(ioSocket, response);
 
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -34,9 +34,26 @@ public class BadServer extends Server {
         }
     }
 
+    private void writeDataFromStdIO(Socket ioSocket, String data) throws IOException {
+        PrintStream oldOut = System.out;
+        PrintStream socketPS = new PrintStream(ioSocket.getOutputStream());
+        System.setOut(socketPS);
+
+        System.out.println(data);
+
+        socketPS.flush();
+        socketPS.close();
+        System.setOut(oldOut);
+    }
+
     private synchronized void listen(SerialHandler sHandler) throws IOException {
         Socket ioSocket = socket.accept();
         new Thread(() -> handle(sHandler, ioSocket)).start();
+    }
+
+    private synchronized void notMultithreadedListen(SerialHandler sHandler) throws IOException {
+        Socket ioSocket = socket.accept();
+        handle(sHandler, ioSocket);
     }
 
     @Override
@@ -46,7 +63,7 @@ public class BadServer extends Server {
 
             try {
                 this.listen(new SerialHandler(handler));                   // многопоточная прослушка
-//                 this.notMultithreadedListen(handler);                   // немногопоточная прослушка
+//                 this.notMultithreadedListen(new SerialHandler(handler));                   // немногопоточная прослушка
             } catch (IOException e) {
                 e.printStackTrace();
             }

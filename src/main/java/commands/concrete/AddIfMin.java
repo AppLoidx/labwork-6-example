@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import util.JSONPersonParser;
 
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.Comparator;
 import java.util.Optional;
@@ -51,6 +52,9 @@ public class AddIfMin extends Command {
         } catch (ValidationException e){
             return JSONContextReader.validationException(e);
         } catch (ParseException e) {
+            return col -> e.getMessage();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
             return col -> e.getMessage();
         }
 

@@ -52,7 +52,6 @@ public class Application {
 
         // launching server
         int port = getPortFromSysProperty("port", 5123);
-        int serialPort = getPortFromSysProperty("serialPort", 666);
 
         //ServerLauncher.launch(port, new RequestHandler(col ,commander));
 

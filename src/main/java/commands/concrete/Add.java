@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import util.JSONPersonParser;
 
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 
 
@@ -45,6 +46,9 @@ public class Add extends Command {
             return JSONContextReader.validationException(e);
         } catch (ParseException e) {
             return  col -> e.getMessage();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return col -> e.getMessage();
         }
     }
 

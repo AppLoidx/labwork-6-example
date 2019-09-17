@@ -36,7 +36,7 @@ public class Server implements Runnable{
     /**
      * Не многопоточная прослушка
      */
-    private synchronized void notMultithreadedListen(final Handler handler) throws IOException {
+    synchronized void notMultithreadedListen(final Handler handler) throws IOException {
         Socket ioSocket = socket.accept();
         handle(handler, ioSocket);
     }
@@ -85,16 +85,7 @@ public class Server implements Runnable{
             bw.flush();
     }
 
-    synchronized void writeDataFromStdIO(Socket ioSocket, String data) throws IOException {
-        System.out.println(data);
-        PrintStream oldOut = System.out;
-        PrintStream socketPS = new PrintStream(ioSocket.getOutputStream());
-        System.setOut(socketPS);
-        System.out.println(data);
-        socketPS.flush();
-        socketPS.close();
-        System.setOut(oldOut);
-    }
+
 
     @Override
     public void run() {
