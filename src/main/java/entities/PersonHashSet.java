@@ -21,6 +21,7 @@ public class PersonHashSet extends CopyOnWriteArraySet<Person> implements CSVWri
 
     public List<Person> getSortedList(){
         List<Person> persons = new ArrayList<>(this);
+        System.out.println(persons);
         // TODO: сортированы по размеру
         Collections.sort(persons);
         return persons;

@@ -3,11 +3,10 @@ package network;
 
 import network.handlers.SerialHandler;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 
 
 public class BadServer extends Server {
@@ -19,6 +18,7 @@ public class BadServer extends Server {
         try(ObjectInputStream ioStream = new ObjectInputStream(ioSocket.getInputStream())){
 
             String response = handler.getResponse(ioStream);
+
 
             // TODO: запись в потоки ввода вывода
             writeDataFromStdIO(ioSocket, response);
@@ -39,7 +39,7 @@ public class BadServer extends Server {
         PrintStream socketPS = new PrintStream(ioSocket.getOutputStream());
         System.setOut(socketPS);
 
-        System.out.println(data);
+        System.out.println(URLCode.encode(data));
 
         socketPS.flush();
         socketPS.close();
