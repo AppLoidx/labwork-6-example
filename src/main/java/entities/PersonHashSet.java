@@ -2,6 +2,8 @@ package entities;
 
 
 
+import com.google.gson.annotations.Expose;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -16,6 +18,9 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 //TODO : Замена на потокобезопасную
 public class PersonHashSet extends CopyOnWriteArraySet<Person> implements CSVWriteable{
+
+    private String owner;
+
 
     private Date changedDate = new Date();
 
@@ -69,5 +74,13 @@ public class PersonHashSet extends CopyOnWriteArraySet<Person> implements CSVWri
                 throw new IOException("Не удалось создать новый файл. Используйте другую директорию");
             }
         }
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

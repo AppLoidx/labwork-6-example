@@ -6,7 +6,6 @@ import network.handlers.SerialHandler;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.ByteBuffer;
 
 
 public class BadServer extends Server {
@@ -15,6 +14,11 @@ public class BadServer extends Server {
     }
 
     private void handle(SerialHandler handler, Socket ioSocket){
+        try {
+            Thread.sleep(80);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         try(ObjectInputStream ioStream = new ObjectInputStream(ioSocket.getInputStream())){
 
             String response = handler.getResponse(ioStream);
@@ -34,7 +38,7 @@ public class BadServer extends Server {
         }
     }
 
-    private void writeDataFromStdIO(Socket ioSocket, String data) throws IOException {
+    private synchronized void writeDataFromStdIO(Socket ioSocket, String data) throws IOException {
         PrintStream oldOut = System.out;
         PrintStream socketPS = new PrintStream(ioSocket.getOutputStream());
         System.setOut(socketPS);
@@ -46,12 +50,16 @@ public class BadServer extends Server {
         System.setOut(oldOut);
     }
 
-    private synchronized void listen(SerialHandler sHandler) throws IOException {
+    private void listen(SerialHandler sHandler) throws IOException {
+
+
         Socket ioSocket = socket.accept();
         new Thread(() -> handle(sHandler, ioSocket)).start();
     }
 
-    private synchronized void notMultithreadedListen(SerialHandler sHandler) throws IOException {
+    private void notMultithreadedListen(SerialHandler sHandler) throws IOException {
+
+
         Socket ioSocket = socket.accept();
         handle(sHandler, ioSocket);
     }

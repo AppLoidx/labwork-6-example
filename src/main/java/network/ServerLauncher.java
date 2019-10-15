@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 
 public class ServerLauncher {
 
-    public static void launchSerialServer(int port, Handler handler){
+    public static void launchSerialServer (int port, Handler handler){
         System.out.println("Starting server ...");
         try {
             Thread serverThread = new Thread(new BadServer(new ServerSocket(port)).setHandler(handler));

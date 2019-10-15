@@ -30,8 +30,8 @@ public class JSONPersonParser {
      */
     public static void validate(JSONObject json) throws FileNotFoundException, ValidationException, URISyntaxException {
 
-        File file = new File("json-schemas/person-validate-schema.json");
-//        File file = new File(JSONPersonParser.class.getClassLoader().getResource("json-schemas/person-validate-schema.json").getPath());
+//        File file = new File("json-schemas/person-validate-schema.json");
+        File file = new File(JSONPersonParser.class.getClassLoader().getResource("json-schemas/person-validate-schema.json").getPath());
         if (!file.exists()){
             throw new FileNotFoundException("Файл " + file.getPath() + " не найден!");
         }

@@ -19,7 +19,7 @@ public class Show extends Command {
                    return col -> {
                        StringBuilder sb = new StringBuilder();
                        col.getSortedList().forEach(e -> sb.append(decor).append(e).append("\n").append(decor));
-                       return sb.toString();
+                       return sb.toString().equals("")?"<Empty>":sb.toString();
                    };
                }
            }
@@ -28,7 +28,7 @@ public class Show extends Command {
         return col -> {
             StringBuilder sb = new StringBuilder();
             col.forEach(e -> sb.append(decor).append(e).append("\n").append(decor));
-            return sb.toString();
+            return sb.toString().equals("")?"<Empty>":sb.toString();
         };
     }
 

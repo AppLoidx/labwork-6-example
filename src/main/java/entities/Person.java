@@ -3,11 +3,13 @@ package entities;
 import java.awt.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
 
 public class Person implements Comparable<Person>, Serializable {
+
     private final String name;
     private final int height;
     private String helloMessage;
@@ -21,16 +23,18 @@ public class Person implements Comparable<Person>, Serializable {
      *  Без явного указания - задается по умолчанию в момент создания объекта
      */
     private final Date birthDate;
+    private final LocalDateTime birthTime;
 
-    public Person(String name, int height, Gender gender, Date birthDate){
+    public Person(String name, int height, Gender gender, Date birthDate, LocalDateTime birthTime){
         this.name = name;
         this.height = height;
         this.gender = gender;
         this.birthDate = birthDate;
+        this.birthTime = birthTime;
     }
 
     public Person(String name, int height, Gender gender){
-        this(name, height, gender, new Date());
+        this(name, height, gender, new Date(), LocalDateTime.now());
     }
 
     // TODO: сортированы по размеру
@@ -100,7 +104,8 @@ public class Person implements Comparable<Person>, Serializable {
                 "helloMessage: '" + getHelloMessage() + '\'' + "\n" +
                 "gender\t\t: '" + gender + "\n" +
                 "point\t\t: '" + getSimpleDimension() + "\'\n" +
-                "birth date\t: '" + getSimpleBirthDate() + '\'';
+                "birth date\t: '" + getSimpleBirthDate() + '\'' +
+                "\nbirth time\t: '" + getBirthTime() + '\'';
     }
 
     /**
@@ -109,5 +114,9 @@ public class Person implements Comparable<Person>, Serializable {
     public String CSVData(){
         return String.format("classOf=%s,height=%d,name=%s,helloMessage=%s,gender=%s,birthDate=%s",
                 getClass().getSimpleName(), height,name, helloMessage=getHelloMessage(),gender.name(), getSimpleBirthDate());
+    }
+
+    public LocalDateTime getBirthTime() {
+        return birthTime;
     }
 }

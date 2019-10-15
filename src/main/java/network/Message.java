@@ -1,6 +1,7 @@
 package network;
 
 import entities.Person;
+import entities.User;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
 public class Message implements Serializable {
     private final String msg;
     private Person attach;
+    private User user;
     private transient final Date generatedDate;
     {
         generatedDate = new Date();
@@ -35,4 +37,11 @@ public class Message implements Serializable {
         return generatedDate;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

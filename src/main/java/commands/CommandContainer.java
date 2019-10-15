@@ -28,6 +28,8 @@ public class CommandContainer {
         commands.add(new Show());
         commands.add(new Save());
         commands.add(new Import());
+        commands.add(new Register());
+        commands.add(new Check());
     }
 
     // Пример добавления через анонимный класс и лямбда функцию

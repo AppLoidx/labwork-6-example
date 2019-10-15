@@ -1,10 +1,17 @@
 package network.handlers;
 
+import commands.Commander;
+import ds.jdbc.CollectionDB;
+import ds.jdbc.UserDB;
 import entities.Person;
+import entities.PersonHashSet;
+import entities.User;
 import network.Message;
+import util.Password;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.sql.SQLException;
 
 /**
  *
@@ -12,7 +19,7 @@ import java.io.ObjectInputStream;
  *
  */
 public class SerialHandler {
-    private final Handler handler;
+    private Handler handler;
     public SerialHandler(Handler handler){
         this.handler = handler;
     }
@@ -26,14 +33,48 @@ public class SerialHandler {
             }
             Message clientMessage = (Message)obj;
 
-            if (clientMessage.getAttach()!=null){
-                return messageWithAttach(clientMessage.getMessage(), clientMessage.getAttach());
+            if (!clientMessage.getMessage().matches("register\\s+.+\\s.+")) {
+                if (clientMessage.getUser() == null || clientMessage.getUser().getUsername() == null || clientMessage.getUser().getPassword() == null) {
+                    return "You don't attached the user login and password. Please, check your request";
+                } else {
+                    String username = clientMessage.getUser().getUsername();
+                    String password = clientMessage.getUser().getPassword();
+
+                    try {
+                        User user = new UserDB().getUserByUsername(username);
+
+                        if (user == null || !Password.isEqual(password, user.getPassword())) {
+                            return "Incorrect password. Please re-auth";
+                        }
+
+                        clientMessage.setUser(user);
+                        // continue the handling operation if user registered or this command equals to "register"
+
+                    } catch (SQLException e) {
+                        return e.getMessage();
+                    }
+                }
             } else {
-                return simpleMessage(clientMessage.getMessage());
+                clientMessage.getUser().setPersonHashSet(new PersonHashSet());
             }
+
+            handler = new RequestHandler(clientMessage.getUser().getPersonHashSet(), new Commander(clientMessage.getUser().getPersonHashSet()));
+
+            String message;
+
+            if (clientMessage.getAttach()!=null){
+                message = messageWithAttach(clientMessage.getMessage(), clientMessage.getAttach());
+            } else {
+                message = simpleMessage(clientMessage.getMessage());
+            }
+
+            new CollectionDB().saveCollection(clientMessage.getUser().getPersonHashSet());
+            return message;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return "Couldn't execute command! Caused by: " + e.getMessage();
+        } catch (SQLException e) {
+            return "Ошибка при работе с БД: " + e.getMessage();
         }
     }
     private String messageWithAttach(String request, Object p){

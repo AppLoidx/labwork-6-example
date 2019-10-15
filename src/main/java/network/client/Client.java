@@ -1,75 +1,83 @@
 package network.client;
 
-import network.URLCode;
+import entities.Person;
+import entities.User;
+import network.Message;
 
 import java.io.*;
 import java.net.ConnectException;
-import java.net.Socket;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 
-/**
- * Класс клиента.
- *
- * При отправке запросов:
- * <ul>
- *     <li>Класс создает сокет</li>
- *     <li>Подключается через указанный порт и хост</li>
- *     <li>Отправляет данные</li>
- *     <li>Ожидает ответа</li>
- *     <li>Закрывает сокет</li>
- *     <li>Выводит ответ</li>
- * </ul>
- *
- * Чтобы отправить данные (и получить их), необходимо использовать метод {@link #sendData(String)}
- *
- */
+
 public class Client {
     private final String HOST;
     private final int PORT;
 
+    private User user;
 
-    public Client(String host, int port) {
+    public Client(String host, int port){
         HOST = host;
         PORT = port;
+        user = new User(null, null);
     }
 
-    /**
-     * Метод для отправки и получения данных от сервера
-     *
-     * Данные кодируется через {@link URLCode}
-     *
-     * @param data отправляемые данные в виде обычного {@link String}
-     * @return ответ сервера
-     * @throws IOException ошибка при работе с сокетами. Следует обработать и попробовать переподключиться
-     */
-    public String sendData(String data) throws IOException {
-        try (Socket clientSocket = new Socket(HOST, PORT);
-             BufferedWriter socketWriter = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-             BufferedReader socketReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
-
-            data = dataPreHandle(data);
-            if (data==null){
-                return "Command not executed";
-            }
-            writeData(URLCode.encode(data), socketWriter);
-            return URLCode.decode(socketReader.readLine());
-        } catch (ConnectException e){
-            System.err.println("Не удалось отправить запрос: " + e.getMessage());
+    public String sendData(Serializable obj){
+        try(SocketChannel sChannel = SocketChannel.open()){
             try {
-                Thread.sleep(100);
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
+                // TODO: через сетевой канал
+                sChannel.connect(new InetSocketAddress(HOST, PORT));
+            } catch (ConnectException ce){
+                // TODO: Обработка временной недоступности
+                return "Can't connect to server. Caused by : " + ce.getMessage() + "\nPlease try again";
             }
-            return sendData(data);
+
+            while(sChannel.isConnectionPending()){
+                try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
+            }
+            if (!sChannel.isConnected()){
+                System.out.println("Can't connect to server. Please try again...");
+            }
+
+            sChannel.write(prepareBuffer(obj));
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(sChannel.socket().getInputStream()));
+            return br.readLine();
+        } catch (IOException e) {
+            System.out.println("Ошибка : " + e.getMessage());
         }
+
+        return null;
     }
 
-    private void writeData(String data, final BufferedWriter socketWriter) throws IOException {
-            socketWriter.write(data.toCharArray());
-            socketWriter.write("\n");
-            socketWriter.flush();
+    public String sendCommand(String command) throws RuntimeException{
+        Message message = new Message(dataPreHandle(command));
+        message.setUser(user);
+        return sendData(message);
+
+    }
+    public String sendCommand(String command, Person p) throws RuntimeException{
+        Message message = new Message(command , p);
+        message.setUser(user);
+        return sendData(message);
     }
 
-    private String dataPreHandle(String data){
+    private ByteBuffer prepareBuffer(Object obj) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(obj);
+        ByteBuffer bf = ByteBuffer.allocate(baos.size());
+        bf.put(baos.toByteArray());
+        bf.flip();
+        return bf;
+    }
+
+    private String dataPreHandle(String data) throws RuntimeException{
+        if (!data.matches("register\\s+.+\\s.+") && (user.getPassword() == null || user.getUsername() == null) ){
+            throw new UnauthorizedException();
+        }
+
         if (data.equals("import")){
             File file = new File(getDataFilePath());
             if (file.exists() && file.canRead()){
@@ -97,7 +105,10 @@ public class Client {
 
     private String getDataFilePath(){
         String path = System.getenv("LAB_DATA_FILE");
-        return path==null?"src/main/resources/data.csv": path;
+        return path==null?"dataImport.csv": path;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

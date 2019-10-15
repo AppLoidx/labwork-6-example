@@ -1,11 +1,12 @@
 package entities;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
 public class Loli extends Person{
-    public Loli(String name, int height, Gender gender, Date birthDate) {
-        super(name, height, gender, birthDate);
+    public Loli(String name, int height, Gender gender, Date birthDate, LocalDateTime localDateTime) {
+        super(name, height, gender, birthDate, localDateTime);
     }
 
     public Loli(String name, int height, Gender gender) {

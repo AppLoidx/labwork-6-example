@@ -1,5 +1,6 @@
 package entities;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -9,15 +10,15 @@ import java.util.Date;
 public enum PersonClass {
     LOLI{
         @Override
-        public Person getInstance(String name, int height, Gender gender, Date birthDate) {
-            return new Loli(name, height, gender, birthDate);
+        public Person getInstance(String name, int height, Gender gender, Date birthDate, LocalDateTime localDateTime) {
+            return new Loli(name, height, gender, birthDate, localDateTime);
         }
     }, HUMAN{
         @Override
-        public Person getInstance(String name, int height, Gender gender, Date birthDate) {
-            return new Human(name, height, gender, birthDate);
+        public Person getInstance(String name, int height, Gender gender, Date birthDate, LocalDateTime localDateTime) {
+            return new Human(name, height, gender, birthDate, localDateTime);
         }};
 
-    public abstract Person getInstance(String name, int height, Gender gender, Date birthDate);
+    public abstract Person getInstance(String name, int height, Gender gender, Date birthDate, LocalDateTime localDateTime);
 
 }

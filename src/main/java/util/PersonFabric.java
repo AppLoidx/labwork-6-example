@@ -5,6 +5,7 @@ import entities.Person;
 import entities.PersonClass;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -18,7 +19,7 @@ public class PersonFabric {
         if (birthDate==null) birthDate = new Date();
         for (PersonClass pc : PersonClass.values()){
             if (pc.name().toLowerCase().equals(classOf.toLowerCase())){
-                Person p =  pc.getInstance(name, height, gender, birthDate);
+                Person p =  pc.getInstance(name, height, gender, birthDate, LocalDateTime.now());
                 p.setHelloMessage(helloMessage);
                 return p;
             }

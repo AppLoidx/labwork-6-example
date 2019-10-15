@@ -1,6 +1,8 @@
 package test;
 
 import main.Application;
+import network.Message;
+import network.URLCode;
 import network.client.Client;
 import network.client.highload.ClientFactory;
 
@@ -14,7 +16,7 @@ import java.util.List;
 class ClientSpammerTest {
     private static volatile Date startTime;
     private static final int clientsCountDefault = 50;
-    private static final int threadsCountDefault = 20;
+    private static final int threadsCountDefault = 15;
 
     public static void main(String ... args) {
             Application app = new Application();
@@ -31,8 +33,8 @@ class ClientSpammerTest {
             try {
                 port = Integer.parseInt(System.getProperty("port", "5123"));
 
-                clientsCount = Integer.parseInt(System.getProperty("clients", "25"));
-                threadsCount = Integer.parseInt(System.getProperty("threads", "7"));
+                clientsCount = Integer.parseInt(System.getProperty("clients", String.valueOf(clientsCountDefault)));
+                threadsCount = Integer.parseInt(System.getProperty("threads", String.valueOf(threadsCountDefault)));
             } catch (NumberFormatException e){
                 System.err.println("Вы ввели неверный формат. Ожидался Integer\n" +
                         e.getMessage());
@@ -41,12 +43,9 @@ class ClientSpammerTest {
             List<Client> clients = ClientFactory.getClients(clientsCount, "localhost", port);
 
             Runnable r = () -> new ArrayList<>(clients).forEach(client -> {
-                try {
-                    System.out.println(client.sendData("info"));
-                    System.out.println(client.sendData("info"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                System.out.println(URLCode.decode(client.sendData(new Message("info"))));
+
+                System.out.println(URLCode.decode(client.sendData(new Message("info"))));
 
             });
 
@@ -58,7 +57,7 @@ class ClientSpammerTest {
                                     "Operation took " + (new Date().getTime() - startTime.getTime()) + "ms\n" +
                                             "Clients : " + clientsCount + "\n" +
                                             "Threads : " + threadsCount + "\n" +
-                                            "Operation delay : 50ms" +
+                                            "Operation delay : 80ms" +
                                     "\n============================")
                     ));
 

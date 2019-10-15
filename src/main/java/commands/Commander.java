@@ -26,14 +26,15 @@ public class Commander {
         } else {
             int oldHash = col.hashCode();
             CollectionAction operation = cmd.getAction(CONTEXT);
-            if (operation==null){
+            if (operation == null) {
                 CommandContainer.deleteCommand(COMMAND);
                 return "Команда не правильно инициализирована и удалена!";
             }
             String response = operation.action(col);
-            if (oldHash != col.hashCode()){
+            if (oldHash != col.hashCode()) {
                 col.setChangedDate();
             }
+
             return response;
         }
     }
