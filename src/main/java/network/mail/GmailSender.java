@@ -11,8 +11,8 @@ import java.util.Properties;
 public class GmailSender {
 
     public static boolean send(String toAdr, String userPassword) {
-        final String email = "your-email";
-        final String password = "your-password";
+        final String email = "apploidykt@gmail.com";    // login
+        final String password = "NikolaevItmo123";      // password
 
         Properties p = new Properties();
         p.put("mail.smtp.host", "smtp.gmail.com");

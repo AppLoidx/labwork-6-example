@@ -68,7 +68,15 @@ public class SerialHandler {
                 message = simpleMessage(clientMessage.getMessage());
             }
 
-            new CollectionDB().saveCollection(clientMessage.getUser().getPersonHashSet());
+            PersonHashSet phs = clientMessage.getUser().getPersonHashSet();
+            if (phs == null) {
+                phs = new PersonHashSet();
+                phs.setOwner(clientMessage.getUser().getUsername());
+                clientMessage.getUser().setPersonHashSet(phs);
+            }
+
+            if (phs.getOwner() == null) phs.setOwner(clientMessage.getUser().getUsername());
+            if (phs.getOwner() != null) new CollectionDB().saveCollection(phs);
             return message;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

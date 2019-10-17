@@ -83,4 +83,11 @@ public class PersonHashSet extends CopyOnWriteArraySet<Person> implements CSVWri
     public void setOwner(String owner) {
         this.owner = owner;
     }
+
+    @Override
+    public String toString() {
+        return "PersonHashSet{" +
+                "owner='" + owner + '\'' +
+                '}';
+    }
 }
